@@ -11,6 +11,14 @@ public class Main {
             }
         }
     }
+    public static boolean checkRepeatedGuess(String[] dashArray, String guess){
+        for (int i = 0; i < dashArray.length; i++) {
+            if (dashArray[i].equals(guess)){
+                return false;
+            }
+        }
+        return true;
+    }
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
         Random rnd = new Random();
@@ -36,12 +44,15 @@ public class Main {
         while (lifePoints != 0){
             System.out.print("Guess a letter: ");
             userGuess = String.valueOf(read.next().charAt(0));
-            // Updates underDashWord array
-            rewriteDashArray(underDashWord, wordByLettersArray, userGuess);
 
-            if(wordChosen.contains(userGuess)){
+            if(wordChosen.contains(userGuess) && checkRepeatedGuess(underDashWord, userGuess)){
                 System.out.println("You guessed a letter");
                 guessedLetters++;
+
+                // Updates underDashWord array
+                rewriteDashArray(underDashWord, wordByLettersArray, userGuess);
+
+                // Checks if the word has been guessed
                 if(guessedLetters == wordChosen.length()-1){
                     System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
                     System.exit(0);
