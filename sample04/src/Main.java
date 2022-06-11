@@ -3,52 +3,50 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    public static void rewriteDashArray(String[] dashes, String[] letters, String guess){
+        for (int i = 0; i < dashes.length; i++) {
+            if (letters[i].equals(guess)){
+                dashes[i] = letters[i];
+            }
+        }
+    }
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
         Random rnd = new Random();
         String[] wordArray = {"Razgrad", "Sliven", "Koprivshtica", "Sofiq", "Varna", "Burgas", "Ruse", "Vratsa",
-                "Shumen", "Plovdiv", "Kavarna", "Botevgrad", "Blagoevo", "Silistra", "Borovec", "Getsovo", "Drqnovec",};
-        String userGuess;
-        int guessedLetters = 0;
+                "Shumen", "Plovdiv", "Kavarna", "Botevgrad", "Blagoevo", "Silistra", "Borovets", "Getsovo", "Drqnovets"};
         String wordChosen = wordArray[rnd.nextInt(15)];
-        int lifePoints = 6;
-        String noSpace = "";
-        // ----------------------------------------------------------------------------------------
         // ARRAYS FOR UNDER DASHES!
 
         String[] underDashWord = new String[wordChosen.length()];
         String[] wordByLettersArray = new String[wordChosen.length()];
 
-        //-----------------------------------------------------------------------------------------
-        // Giving them the index values
+        // Giving the arrays above values depending on the word`s length
         Arrays.fill(underDashWord, "_");
         for (int i = 0; i < wordChosen.length(); i++) {
             wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
         }
 
-        // ----------------------------------------------------------------------------------------
-        // loop
+        String userGuess;
+        int guessedLetters = 0;
+        int lifePoints = 6;
+        String noSpace = "";
 
         while (lifePoints != 0){
             System.out.print("Guess a letter: ");
             userGuess = String.valueOf(read.next().charAt(0));
+            // Updates underDashWord array
+            rewriteDashArray(underDashWord, wordByLettersArray, userGuess);
 
-            for (int i = 0; i < underDashWord.length; i++) {
-                if (wordByLettersArray[i].equals(userGuess)){
-                    underDashWord[i] = wordByLettersArray[i];
-                }
-            }
             if(wordChosen.contains(userGuess)){
-
                 System.out.println("You guessed a letter");
                 guessedLetters++;
                 if(guessedLetters == wordChosen.length()-1){
                     System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
                     System.exit(0);
                 }
-            }
-            // Drawing the hanging thing
-            else{
+            } else{ // Drawing the hangman picture
                 if(lifePoints == 5){
                     System.out.println("""
                              /-----|
