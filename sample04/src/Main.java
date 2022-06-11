@@ -17,7 +17,23 @@ public class Main {
                 return false;
             }
         }
+
         return true;
+    }
+    public static int pointsNeeded(String[] wordByLetters){
+        int points = 0;
+
+        for (int i = 0; i < wordByLetters.length; i++) {
+            for (int j = i + 1; j < wordByLetters.length; j++) {
+                if(wordByLetters[i].equals(wordByLetters[j])){
+                    points--;
+                }
+            }
+            points++;
+        }
+        System.out.println(points);
+
+        return points;
     }
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
@@ -53,12 +69,14 @@ public class Main {
                 rewriteDashArray(underDashWord, wordByLettersArray, userGuess);
 
                 // Checks if the word has been guessed
-                if(guessedLetters == wordChosen.length()-1){
+                if(guessedLetters == pointsNeeded(wordByLettersArray)){
                     System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
                     System.exit(0);
                 }
             } else{ // Drawing the hangman picture
+                lifePoints--;
                 if(lifePoints == 5){
+
                     System.out.println("""
                              /-----|
                              |
@@ -113,7 +131,7 @@ public class Main {
                              |  _|   |_
                              /\\""");
                 }
-                lifePoints--;
+
             }
             System.out.println(String.join(noSpace, underDashWord));
         }
