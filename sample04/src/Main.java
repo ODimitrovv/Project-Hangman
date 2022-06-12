@@ -154,12 +154,13 @@ public class Main {
                 System.out.println("------------------------------------");
                 break;
             case 2:
-                // TODO: Check which player is guessing to see who guessed the word last
-                // TODO: Add scores
+                int playerOne = 1, playerTwo = 0;
                 String userGuessTwoPlayers;
                 int guessedLettersTwoPlayers = 0;
                 int lifePointsTwoPlayers = 6;
                 System.out.println("Player one starts first.");
+
+                int scorePlayerOne = 0, scorePlayerTwo = 0;
 
                 while (lifePointsTwoPlayers != -1){
                     System.out.print("Guess a letter: ");
@@ -174,12 +175,45 @@ public class Main {
                         // Checks if the word has been guessed
                         if(guessedLettersTwoPlayers == pointsNeeded(wordByLettersArray)){
                             System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
-                            System.exit(0);
-                        }
-                    } else{ // Drawing the hangman picture
-                        lifePointsTwoPlayers--;
-                        if(lifePointsTwoPlayers == 5){
+                            if(playerOne == 1){
+                                scorePlayerOne++;
+                                System.out.println("Player 1`s score: " + scorePlayerOne +
+                                        "\nPlayer 2`s score:" + scorePlayerTwo);
+                            }else {
+                                scorePlayerTwo++;
+                                System.out.println("Player 1`s score: " + scorePlayerOne +
+                                        "\nPlayer 2`s score:" + scorePlayerTwo);
+                            }
 
+                            // Play again feature
+                            System.out.println("--------------------------");
+                            System.out.println("Do you wish to play again?");
+                            String doYouContinue = read.next();
+                            if (doYouContinue.equals("yes")){
+                                lifePointsTwoPlayers = 6;
+                            }else{
+                                if(scorePlayerOne > scorePlayerTwo){
+                                    System.out.println("Player 1 wins!");
+                                }else if(scorePlayerTwo > scorePlayerOne){
+                                    System.out.println("Player 2 wins!");
+                                }else{
+                                    System.out.println("X");
+                                }
+                            }
+
+                        }} else{ // Drawing the hangman picture
+
+                        lifePointsTwoPlayers--;
+                        // By doing this the player who last had 1 will have guessed the word
+                        if(playerOne == 1){
+                            playerOne--;
+                            playerTwo++;
+                        }else if(playerTwo == 1){
+                            playerTwo--;
+                            playerOne++;
+                        }
+
+                        if(lifePointsTwoPlayers == 5){
                             System.out.println("""
                              /-----|
                              |
@@ -236,11 +270,21 @@ public class Main {
                         }
                     }
                     System.out.println(String.join(noSpace, underDashWord));
+
+                    // Play again feature
                     if(lifePointsTwoPlayers == 0){
                         System.out.println("Do you wish to play again?");
                         String doYouContinue = read.next();
                         if (doYouContinue.equals("yes")){
                             lifePointsTwoPlayers += 6;
+                        }else{
+                            if(scorePlayerOne > scorePlayerTwo){
+                                System.out.println("Player 1 wins!");
+                            }else if(scorePlayerTwo > scorePlayerOne){
+                                System.out.println("Player 2 wins!");
+                            }else{
+                                System.out.println("X");
+                            }
                         }
                     }
                 }
