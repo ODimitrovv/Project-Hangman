@@ -34,7 +34,6 @@ public class Main {
 
         return points;
     }
-    // TODO: make the dashes array and the word by letters array get their values trough a method
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
         Random rnd = new Random();
@@ -173,7 +172,8 @@ public class Main {
                         rewriteDashArray(underDashWord, wordByLettersArray, userGuessTwoPlayers);
 
                         // Checks if the word has been guessed
-                        if(guessedLettersTwoPlayers == pointsNeeded(wordByLettersArray)){
+                        int wordChosenPoints = pointsNeeded(wordByLettersArray);
+                        if(guessedLettersTwoPlayers == wordChosenPoints){
                             System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
                             if(playerOne == 1){
                                 scorePlayerOne++;
@@ -192,16 +192,17 @@ public class Main {
                             if (doYouContinue.equals("yes")){
                                 lifePointsTwoPlayers = 6;
                                 wordChosen = wordArray[rnd.nextInt(15)];
-                                // ARRAYS FOR UNDER DASHES!
 
+                                // rewriting the arrays with a new word
                                 underDashWord = new String[wordChosen.length()];
                                 wordByLettersArray = new String[wordChosen.length()];
 
-                                // filling the arrays
                                 Arrays.fill(underDashWord, "_");
                                 for (int i = 0; i < wordChosen.length(); i++) {
                                     wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
                                 }
+                                guessedLettersTwoPlayers = 0;
+                                playerOne = 1;
                             }else{
                                 if(scorePlayerOne > scorePlayerTwo){
                                     System.out.println("Player 1 wins!");
