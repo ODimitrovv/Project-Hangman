@@ -46,7 +46,7 @@ public class Main {
         String[] underDashWord = new String[wordChosen.length()];
         String[] wordByLettersArray = new String[wordChosen.length()];
 
-        // Giving the arrays above values depending on the word`s length
+        // filling the arrays
         Arrays.fill(underDashWord, "_");
         for (int i = 0; i < wordChosen.length(); i++) {
             wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
@@ -191,6 +191,17 @@ public class Main {
                             String doYouContinue = read.next();
                             if (doYouContinue.equals("yes")){
                                 lifePointsTwoPlayers = 6;
+                                wordChosen = wordArray[rnd.nextInt(15)];
+                                // ARRAYS FOR UNDER DASHES!
+
+                                underDashWord = new String[wordChosen.length()];
+                                wordByLettersArray = new String[wordChosen.length()];
+
+                                // filling the arrays
+                                Arrays.fill(underDashWord, "_");
+                                for (int i = 0; i < wordChosen.length(); i++) {
+                                    wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
+                                }
                             }else{
                                 if(scorePlayerOne > scorePlayerTwo){
                                     System.out.println("Player 1 wins!");
@@ -199,8 +210,8 @@ public class Main {
                                 }else{
                                     System.out.println("X");
                                 }
+                                System.exit(0);
                             }
-
                         }} else{ // Drawing the hangman picture
 
                         lifePointsTwoPlayers--;
@@ -277,6 +288,17 @@ public class Main {
                         String doYouContinue = read.next();
                         if (doYouContinue.equals("yes")){
                             lifePointsTwoPlayers += 6;
+                            wordChosen = wordArray[rnd.nextInt(15)];
+                            // ARRAYS FOR UNDER DASHES!
+
+                            underDashWord = new String[wordChosen.length()];
+                            wordByLettersArray = new String[wordChosen.length()];
+
+                            // filling the arrays
+                            Arrays.fill(underDashWord, "_");
+                            for (int i = 0; i < wordChosen.length(); i++) {
+                                wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
+                            }
                         }else{
                             if(scorePlayerOne > scorePlayerTwo){
                                 System.out.println("Player 1 wins!");
@@ -285,6 +307,7 @@ public class Main {
                             }else{
                                 System.out.println("X");
                             }
+                            System.exit(0);
                         }
                     }
                 }
