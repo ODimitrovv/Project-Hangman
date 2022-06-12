@@ -213,18 +213,16 @@ public class Main {
                                 }
                                 System.exit(0);
                             }
-                        }} else{ // Drawing the hangman picture
-
-                        lifePointsTwoPlayers--;
-                        // By doing this the player who last had 1 will have guessed the word
-                        if(playerOne == 1){
+                        }} else{ // Letter not guessed. Drawing the hangman picture. Changing the guesser
+                        if (playerOne == 1){
                             playerOne--;
                             playerTwo++;
-                        }else if(playerTwo == 1){
+                        }else {
                             playerTwo--;
                             playerOne++;
                         }
 
+                        lifePointsTwoPlayers--;
                         if(lifePointsTwoPlayers == 5){
                             System.out.println("""
                              /-----|
@@ -281,10 +279,16 @@ public class Main {
                              /\\""");
                         }
                     }
+
+                    // Prints who`s turn it is.
+                    String whoTurn = playerOne>playerTwo? "Player one`s turn" : "Player two`s turn";
+                    System.out.println(whoTurn);
                     System.out.println(String.join(noSpace, underDashWord));
 
                     // Play again feature
                     if(lifePointsTwoPlayers == 0){
+                        System.out.println("Word was: " + wordChosen);
+                        System.out.println("--------------------------\n");
                         System.out.println("Do you wish to play again?");
                         String doYouContinue = read.next();
                         if (doYouContinue.equals("yes")){
