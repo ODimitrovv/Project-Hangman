@@ -22,11 +22,11 @@ public class Main {
     }
     public static int pointsNeeded(String[] wordByLetters){
         int points = 0;
-        // TODO: fix words with a letter that is repeated more then once
         for (int i = 0; i < wordByLetters.length; i++) {
             for (int j = i + 1; j < wordByLetters.length; j++) {
                 if(wordByLetters[i].equals(wordByLetters[j])){
                     points--;
+                    break;
                 }
             }
             points++;
@@ -38,8 +38,9 @@ public class Main {
         Scanner read = new Scanner(System.in);
         Random rnd = new Random();
         String[] wordArray = {"Razgrad", "Sliven", "Koprivshtica", "Sofiq", "Varna", "Burgas", "Ruse", "Vratsa",
-                "Shumen", "Plovdiv", "Kavarna", "Botevgrad", "Blagoevo", "Silistra", "Borovets", "Getsovo", "Drqnovets"};
-        String wordChosen = wordArray[rnd.nextInt(15)];
+                "Shumen", "Plovdiv", "Kavarna", "Botevgrad", "Blagoevo", "Silistra", "Borovets", "Getsovo", "Drqnovets",
+        "Popovo", "Pleven", "Montana", "Yambol", "Kardzhali", "Targovishte", "Kyustendil"};
+        String wordChosen = wordArray[rnd.nextInt(wordArray.length-1)];
         // ARRAYS FOR UNDER DASHES!
 
         String[] underDashWord = new String[wordChosen.length()];
