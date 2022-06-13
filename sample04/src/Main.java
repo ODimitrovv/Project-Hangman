@@ -3,7 +3,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
     public static void rewriteDashArray(String[] dashes, String[] letters, String guess){
         for (int i = 0; i < dashes.length; i++) {
             if (letters[i].equals(guess)){
@@ -158,13 +157,19 @@ public class Main {
                 String userGuessTwoPlayers;
                 int guessedLettersTwoPlayers = 0;
                 int lifePointsTwoPlayers = 6;
-                System.out.println("Player one starts first.");
+
+                System.out.print("Enter player 1`s name: ");
+                String playerOneName = read.next();
+                System.out.print("Enter player 2`s name: ");
+                String playerTwoName = read.next();
+
+                System.out.println(playerOneName + " starts first.");
 
                 int scorePlayerOne = 0, scorePlayerTwo = 0;
 
                 while (lifePointsTwoPlayers != -1){
                     System.out.print("Guess a letter: ");
-                    userGuessTwoPlayers = read.next();
+                    userGuessTwoPlayers = String.valueOf(read.next().charAt(0));
                     if (wordChosen.contains(userGuessTwoPlayers) && checkRepeatedGuess(underDashWord, userGuessTwoPlayers)){
                         System.out.println("You guessed a letter");
                         guessedLettersTwoPlayers++;
@@ -178,18 +183,18 @@ public class Main {
                             System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
                             if(playerOne == 1){
                                 scorePlayerOne++;
-                                System.out.println("Player 1`s score: " + scorePlayerOne +
-                                        "\nPlayer 2`s score:" + scorePlayerTwo);
+                                System.out.println(playerOneName+"`s score: " + scorePlayerOne +
+                                        "\n" + playerTwoName+"`s score: " + scorePlayerTwo);
                             }else {
                                 scorePlayerTwo++;
-                                System.out.println("Player 1`s score: " + scorePlayerOne +
-                                        "\nPlayer 2`s score:" + scorePlayerTwo);
+                                System.out.println(playerOneName+"`s score: " + scorePlayerOne +
+                                        "\n" + playerTwoName+"`s score: " + scorePlayerTwo);
                             }
 
                             // Play again feature
                             System.out.println("--------------------------");
                             System.out.println("Do you wish to play again?");
-                            String doYouContinue = read.next();
+                            String doYouContinue = read.next().toLowerCase();
                             if (doYouContinue.equals("yes")){
                                 lifePointsTwoPlayers = 6;
                                 wordChosen = wordArray[rnd.nextInt(15)];
@@ -206,9 +211,9 @@ public class Main {
                                 playerOne = 1;
                             }else{
                                 if(scorePlayerOne > scorePlayerTwo){
-                                    System.out.println("Player 1 wins!");
+                                    System.out.println(playerOneName + " wins!");
                                 }else if(scorePlayerTwo > scorePlayerOne){
-                                    System.out.println("Player 2 wins!");
+                                    System.out.println(playerTwoName + " wins!");
                                 }else{
                                     System.out.println("X");
                                 }
@@ -282,7 +287,7 @@ public class Main {
                     }
 
                     // Prints who`s turn it is.
-                    String whoTurn = playerOne>playerTwo? "Player one`s turn" : "Player two`s turn";
+                    String whoTurn = playerOne>playerTwo? playerOneName + "`s turn" : playerTwoName + "`s turn";
                     System.out.println(whoTurn);
                     System.out.println(String.join(noSpace, underDashWord));
 
@@ -307,9 +312,9 @@ public class Main {
                             }
                         }else{
                             if(scorePlayerOne > scorePlayerTwo){
-                                System.out.println("Player 1 wins!");
+                                System.out.println(playerOne + " wins!");
                             }else if(scorePlayerTwo > scorePlayerOne){
-                                System.out.println("Player 2 wins!");
+                                System.out.println(playerTwoName + " wins!");
                             }else{
                                 System.out.println("X");
                             }
