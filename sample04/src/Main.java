@@ -131,11 +131,22 @@ public class Main {
                              |
                              |
                              /\\""");
-                        }else if(lifePoints == 1){
+                        }else if (lifePoints == 1){
                             System.out.println("""
                              /-----|
                              |   / - \\
                              |    o o
+                             |   \\ - /
+                             | ---/|\\---
+                             |   / | \\
+                             |   |---|
+                             |  _|   |_
+                             /\\""");
+                        }else{
+                            System.out.println("""
+                             /-----|
+                             |   / - \\
+                             |    x x
                              |   \\ - /
                              | ---/|\\---
                              |   / | \\
@@ -277,6 +288,17 @@ public class Main {
                              /-----|
                              |   / - \\
                              |    o o
+                             |   \\ - /
+                             | ---/|\\---
+                             |   / | \\
+                             |   |---|
+                             |  _|   |_
+                             /\\""");
+                        }else if (lifePointsTwoPlayers <= 0){
+                            System.out.println("""
+                             /-----|
+                             |   / - \\
+                             |    x x
                              |   \\ - /
                              | ---/|\\---
                              |   / | \\
