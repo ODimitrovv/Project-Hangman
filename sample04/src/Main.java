@@ -36,7 +36,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
         Random rnd = new Random();
-        String[] wordArray = {"Razgrad", "Sliven", "Koprivshtica", "Sofiq", "Varna", "Burgas", "Ruse", "Vratsa",
+        String[] wordArray = {"Razgrad", "Sliven", "Koprivshtica", "Sofia", "Varna", "Burgas", "Ruse", "Vratsa",
                 "Shumen", "Plovdiv", "Kavarna", "Botevgrad", "Blagoevo", "Silistra", "Borovets", "Getsovo", "Drqnovets",
         "Popovo", "Pleven", "Montana", "Yambol", "Kardzhali", "Targovishte", "Kyustendil"};
         String wordChosen = wordArray[rnd.nextInt(wordArray.length-1)];
@@ -190,8 +190,10 @@ public class Main {
 
                         // Checks if the word has been guessed
                         int wordChosenPoints = pointsNeeded(wordByLettersArray);
+
                         if(guessedLettersTwoPlayers == wordChosenPoints){
                             System.out.println("You guessed the word! Good job! \nWord was: " + wordChosen);
+
                             if(playerOne == 1){
                                 scorePlayerOne++;
                                 System.out.println(playerOneName+"`s score: " + scorePlayerOne +
@@ -206,6 +208,7 @@ public class Main {
                             System.out.println("--------------------------");
                             System.out.println("Do you wish to play again?");
                             String doYouContinue = read.next().toLowerCase();
+
                             if (doYouContinue.equals("yes")){
                                 lifePointsTwoPlayers = 6;
                                 wordChosen = wordArray[rnd.nextInt(15)];
@@ -218,8 +221,11 @@ public class Main {
                                 for (int i = 0; i < wordChosen.length(); i++) {
                                     wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
                                 }
+
+                                // Sets some variables back to default in order for the game to run normally
                                 guessedLettersTwoPlayers = 0;
                                 playerOne = 1;
+                                playerTwo = 0;
                             }else{
                                 if(scorePlayerOne > scorePlayerTwo){
                                     System.out.println(playerOneName + " wins!");
@@ -321,7 +327,7 @@ public class Main {
                         String doYouContinue = read.next();
                         if (doYouContinue.equals("yes")){
                             lifePointsTwoPlayers += 6;
-                            wordChosen = wordArray[rnd.nextInt(15)];
+                            wordChosen = wordArray[rnd.nextInt(wordArray.length)];
                             // ARRAYS FOR UNDER DASHES!
 
                             underDashWord = new String[wordChosen.length()];
