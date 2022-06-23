@@ -158,6 +158,7 @@ public class Main {
                     }
                     System.out.println(String.join(noSpace, underDashWord));
                 }
+
                 // if we have lost the loop stops since our hp got to 0 and this is what comes next:
                 System.out.println("------------------------------------");
                 System.out.println("You lose...\nWord was: "+ wordChosen + "      | DEAD |");
@@ -204,14 +205,19 @@ public class Main {
                                         "\n" + playerTwoName+"`s score: " + scorePlayerTwo);
                             }
 
-                            // Play again feature
+                            // Play again feature when word is guessed
                             System.out.println("--------------------------");
                             System.out.println("Do you wish to play again?");
                             String doYouContinue = read.next().toLowerCase();
 
                             if (doYouContinue.equals("yes")){
+                                // Sets some variables back to default in order for the game to run normally
+                                guessedLettersTwoPlayers -= guessedLettersTwoPlayers;
+                                playerOne = 1;
+                                playerTwo = 0;
                                 lifePointsTwoPlayers = 6;
-                                wordChosen = wordArray[rnd.nextInt(15)];
+
+                                wordChosen = wordArray[rnd.nextInt(wordArray.length-1)];
 
                                 // rewriting the arrays with a new word
                                 underDashWord = new String[wordChosen.length()];
@@ -222,10 +228,6 @@ public class Main {
                                     wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
                                 }
 
-                                // Sets some variables back to default in order for the game to run normally
-                                guessedLettersTwoPlayers = 0;
-                                playerOne = 1;
-                                playerTwo = 0;
                             }else{
                                 if(scorePlayerOne > scorePlayerTwo){
                                     System.out.println(playerOneName + " wins!");
@@ -319,15 +321,20 @@ public class Main {
                     System.out.println(whoTurn);
                     System.out.println(String.join(noSpace, underDashWord));
 
-                    // Play again feature
+                    // Play again feature when hp is at 0
                     if(lifePointsTwoPlayers == 0){
                         System.out.println("Word was: " + wordChosen);
                         System.out.println("--------------------------\n");
                         System.out.println("Do you wish to play again?");
-                        String doYouContinue = read.next();
+                        String doYouContinue = read.next().toLowerCase();
                         if (doYouContinue.equals("yes")){
-                            lifePointsTwoPlayers += 6;
-                            wordChosen = wordArray[rnd.nextInt(wordArray.length)];
+                            // Sets some variables back to default in order for the game to run normally
+                            guessedLettersTwoPlayers -= guessedLettersTwoPlayers;
+                            playerOne = 1;
+                            playerTwo = 0;
+                            lifePointsTwoPlayers = 6;
+
+                            wordChosen = wordArray[rnd.nextInt(wordArray.length-1)];
                             // ARRAYS FOR UNDER DASHES!
 
                             underDashWord = new String[wordChosen.length()];
@@ -338,6 +345,7 @@ public class Main {
                             for (int i = 0; i < wordChosen.length(); i++) {
                                 wordByLettersArray[i] = String.valueOf(wordChosen.charAt(i));
                             }
+
                         }else{
                             if(scorePlayerOne > scorePlayerTwo){
                                 System.out.println(playerOne + " wins!");
